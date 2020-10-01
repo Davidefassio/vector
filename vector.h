@@ -1,3 +1,8 @@
+/**
+ *  MIT License
+ *  Copyright (c) 2020 Davide Fassio
+ */
+
 #ifndef VECTOR_H_INCLUDED
 #define VECTOR_H_INCLUDED
 
