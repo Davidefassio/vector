@@ -63,29 +63,69 @@ void shrink(Vector *v){
     v->capacity = v->length;
 }
 
-int isEqual(Vector *v1, Vector *v2){
-    if(v1->length != v2->length){ return 0; }
-    int i;
-    for(i = 0; i < v1->length; ++i){ if(v1->data[i] != v2->data[i]){ return 0; } }
+int isEqual(int cnt, ...){
+    if(cnt < 1){ exit(EXIT_FAILURE); }
+    if(cnt == 1) { return 1; }
+    va_list args;
+    va_start(args, cnt);
+    int i, j, c, l = va_arg(args, Vector*)->length;
+    for(i = 1; i < cnt; ++i){
+        if(l != va_arg(args, Vector*)->length){ return 0; }
+    }
+    va_end(args);
+    for(i = 0; i < l; ++i){
+        va_start(args, cnt);
+        c = va_arg(args, Vector*)->data[i];
+        for(j = 1; j < cnt; ++j){
+            if(c != va_arg(args, Vector*)->data[i]){ return 0; }
+        }
+        va_end(args);
+    }
     return 1;
 }
 
-Vector* sum(Vector *v1, Vector *v2){
-    if(v1->length != v2->length){ exit(EXIT_FAILURE); }
-    Vector *tmp = (Vector*) malloc(sizeof(Vector)); init(tmp);
-    set_size(tmp, v1->length);
-    int i;
-    for(i = 0; i < v1->length; ++i){
-        push_int(tmp, v1->data[i] + v2->data[i]);
+Vector* sum(int cnt, ...){
+    if(cnt < 1){ exit(EXIT_FAILURE); }
+    else if(cnt == 1){
+        Vector *tmp = (Vector*) malloc(sizeof(Vector)); init(tmp);
+        push_int(tmp, 0);
+        va_list args;
+        va_start(args, cnt);
+        Vector *t = va_arg(args, Vector*);
+        int i;
+        for(i = 0; i < t->length; ++i){ tmp->data[0] += t->data[i]; }
+        return tmp;
     }
-    return tmp;
+    else{
+        va_list args;
+        va_start(args, cnt);
+        int i, j, l = va_arg(args, Vector*)->length;
+        for(i = 1; i < cnt; ++i){
+            if(l != va_arg(args, Vector*)->length){ exit(EXIT_FAILURE); }
+        }
+        va_end(args);
+        Vector *tmp = (Vector*) malloc(sizeof(Vector)); init(tmp);
+        set_size(tmp, l);
+        for(i = 0; i < l; ++i){
+            push_int(tmp, 0);
+            va_start(args, cnt);
+            for(j = 0; j < cnt; ++j){
+                tmp->data[i] += va_arg(args, Vector*)->data[i];
+            }
+            va_end(args);
+        }
+        return tmp;
+    }
 }
 
 void print(Vector *v, FILE *f){
     if(v->length < 1){ return; }
     int i;
     fprintf(f, "%d", v->data[0]);
-    for(i = 1; i < v->length; ++i){ fprintf(f, " %d", v->data[i]); }
+    for(i = 1; i < v->length; ++i){
+        fprintf(f, " %d", v->data[i]);
+    }
+    fprintf(f, "\n");
 }
 
 #endif // VECTOR_H_INCLUDED
