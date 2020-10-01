@@ -17,10 +17,10 @@ Set a given capacity. If it's less than the length than some data will be lost. 
 ```void shrink(Vector*)``` \
 Reduce the capacity of the vector to match the length and so reducing the memory wasted.
 
-```int isEqual(Vector*, Vector*)``` \
+```int isEqual(Vector*, Vector*)``` VARIADIC FUNCTION\
 Check if two vectors are equal. It return 0 (false) or 1 (true).
 
-```Vector* sum(Vector*, Vector*)``` \
+```Vector* sum(Vector*, Vector*)``` VARIADIC FUNCTION\
 Sum two vectors and returns a vector already initialized containing the sum element by element.
 
 ```void print(Vector*, FILE*)``` 
