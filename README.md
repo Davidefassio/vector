@@ -3,7 +3,7 @@ Implementation of std::vector in C.
 
 ## Functions
 ```void init(Vector*)``` \
-EVERY vector must be initialized usign this function (recommended) or manually.
+EVERY vector must be initialized using this function (recommended) or manually.
 
 ```void push_int(Vector*, int)``` \
 Append a number (int) at the end of the vector, if it exceeds the capacity it's resized automatically doubling the capacity. 
