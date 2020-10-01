@@ -25,3 +25,8 @@ Sum two vectors and returns a vector already initialized containing the sum elem
 
 ```void print(Vector*, FILE*)``` 
 Print on a file the vector.
+
+## License
+
+## Author
+Davide Fassio.
