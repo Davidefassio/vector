@@ -27,6 +27,8 @@ Sum two vectors and returns a vector already initialized containing the sum elem
 Print on a file the vector.
 
 ## License
+MIT License \
+Copyright (c) 2020 Davide Fassio
 
 ## Author
 Davide Fassio.
