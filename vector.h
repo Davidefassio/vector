@@ -91,7 +91,7 @@ Vector* sum(Vector *v1, Vector *v2){
 }
 
 void print(Vector *v){
-    printf("Capacity: %d, Length: %d\n", v->capacity, v->length); // DEBUG
+    // printf("Capacity: %d, Length: %d\n", v->capacity, v->length); // DEBUG
     int i;
     printf("[ ");
     for(i = 0; i < v->length; ++i){
