@@ -66,9 +66,7 @@ void shrink(Vector *v){
 int isEqual(Vector *v1, Vector *v2){
     if(v1->length != v2->length){ return 0; }
     int i;
-    for(i = 0; i < v1->length; ++i){
-        if(v1->data[i] != v2->data[i]){ return 0; }
-    }
+    for(i = 0; i < v1->length; ++i){ if(v1->data[i] != v2->data[i]){ return 0; } }
     return 1;
 }
 
@@ -87,9 +85,7 @@ void print(Vector *v, FILE *f){
     if(v->length < 1){ return; }
     int i;
     fprintf(f, "%d", v->data[0]);
-    for(i = 1; i < v->length; ++i){
-        fprintf(f, " %d", v->data[i]);
-    }
+    for(i = 1; i < v->length; ++i){ fprintf(f, " %d", v->data[i]); }
 }
 
 #endif // VECTOR_H_INCLUDED
