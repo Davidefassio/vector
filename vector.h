@@ -10,18 +10,6 @@
 #include <stdio.h>
 #include <malloc.h>
 
-/**
- * Functions' prototype:
- *   - void init(Vector*)
- *   - void push_int(Vector*, int)
- *   - void pop(Vector*, int)
- *   - void set_size(Vector*, int)
- *   - void shrink(Vector*)
- *   - int isEqual(Vector*, Vector*)
- *   - Vector* sum(Vector*, Vector*)
- *   - void print(Vector*)
- */
-
 typedef struct{
     int *data;
     int capacity;
@@ -95,15 +83,13 @@ Vector* sum(Vector *v1, Vector *v2){
     return tmp;
 }
 
-void print(Vector *v){
-    // printf("Capacity: %d, Length: %d\n", v->capacity, v->length); // DEBUG
+void print(Vector *v, FILE *f){
+    if(v->length < 1){ return; }
     int i;
-    printf("[ ");
-    for(i = 0; i < v->length; ++i){
-        printf("%d ", v->data[i]);
+    fprintf(f, "%d", v->data[0]);
+    for(i = 1; i < v->length; ++i){
+        fprintf(f, " %d", v->data[i]);
     }
-    printf("]\n");
 }
-
 
 #endif // VECTOR_H_INCLUDED
