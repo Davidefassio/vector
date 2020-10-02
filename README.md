@@ -6,7 +6,7 @@ Implementation of std::vector in C.
 typedef struct{
     int *data;    // Pointer to the array
     int capacity; // Actual capacity of the array
-    int length;   // Number of elements inserted (using push_back)
+    int length;   // Number of elements inserted (using push_int / push_arr)
 }Vector;
 ```
 
