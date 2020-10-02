@@ -39,10 +39,8 @@ Check if two vectors are equal in length and in the data, NOT in capacity. It re
 ```Vector* sum(Vector*, Vector*)``` \
 Sum two vectors and returns a vector already initialized containing the sum element by element.
 
-
 ```Vector* sub(Vector*, Vector*)``` \
 Sum two vectors and returns a vector already initialized containing the sum element by element.
-
 
 ```Vector* mult(Vector*, Vector*)``` \
 Sum two vectors and returns a vector already initialized containing the sum element by element.
