@@ -33,7 +33,7 @@ Reduce the capacity of the vector to match the length and so reducing the memory
 Copy a vector and return another istance equivalent in data, capacity and length.
 
 ```int isEqual(Vector*, Vector*)``` \
-Check if two vectors are equal. It return 0 (false) or 1 (true).
+Check if two vectors are equal in length and in the data, NOT in capacity. It return 0 (false) or 1 (true).
 
 ```Vector* sum(Vector*, Vector*)``` \
 Sum two vectors and returns a vector already initialized containing the sum element by element.
