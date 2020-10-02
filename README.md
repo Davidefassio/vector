@@ -72,10 +72,12 @@ Elevate to the float given all the elements of the vector, storing the result in
 Dot product between two vectors of the same length. Return a float containing the result.
 
 ```void print(Vector*, FILE*)``` \
-Print on a file the vector.
+Print on a file the vector. \
+To print on screen use as file pointer ```stdout```.
 
 ```void println(Vector*, FILE*)``` \
 Print on a file the vector and the new line character.
+To print on screen use as file pointer ```stdout```.
 
 ## License
 MIT License \
