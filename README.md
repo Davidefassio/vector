@@ -2,7 +2,7 @@
 Implementation of std::vector in C.
 
 ## Functions
-Aggiungere: println, push_arr, sub, dot_prod, veccpy.
+Aggiungere: println, push_arr, sub, mult, div, kmult, dot_prod, kpow, veccpy.
 
 ```void init(Vector*)``` \
 EVERY vector must be initialized using this function (recommended) or manually.
