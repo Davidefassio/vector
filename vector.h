@@ -43,7 +43,6 @@ void push_float(Vector *v, float n){
         for(i = 0; i < v->length; ++i){
             tmp[i] = v->data[i];
         }
-        
         tmp[i] = n;
         ++v->length;
         
@@ -77,7 +76,6 @@ void push_arr(Vector *v, float *arr, size_t n){
         }
         for(i = 0; i < n; ++i){
             tmp[v->length+i] = arr[i];
-            
         }
         v->length += n;
         
@@ -92,6 +90,7 @@ void pop(Vector *v, size_t n){
 
 void set_size(Vector *v, size_t cap){
     if(cap < 1){
+        printf("The capacity must be greater than 0.\n");
         return;
     }
     if(v->capacity < cap){
