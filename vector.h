@@ -12,25 +12,26 @@
 #include <math.h>
 
 typedef struct{
-    int *data;
+    float *data;
     int capacity;
     int length;
 }Vector;
 
 void init(Vector *v){
-    v->data = (int*) malloc(sizeof(int));
+    v->data = (float*) malloc(sizeof(float));
     v->capacity = 1;
     v->length = 0;
 }
 
-void push_int(Vector *v, int n){
+void push_float(Vector *v, float n){
     if(v->length < v->capacity){
         v->data[v->length] = n;
         ++v->length;
     }
     else{
         v->capacity *= 2;
-        int *tmp = (int*) malloc(sizeof(int)*v->capacity), i;
+        float *tmp = (float*) malloc(sizeof(float)*v->capacity);
+        int i;
         for(i = 0; i < v->length; ++i){ tmp[i] = v->data[i]; }
         tmp[i] = n;
         ++v->length;
@@ -39,7 +40,7 @@ void push_int(Vector *v, int n){
     }
 }
 
-void push_arr(Vector *v, int *arr, int n){
+void push_arr(Vector *v, float *arr, int n){
     if(v->length + n < v->capacity){
         int i;
         for(i = 0; i < n; ++i){ v->data[v->length+i] = arr[n]; }
@@ -47,7 +48,8 @@ void push_arr(Vector *v, int *arr, int n){
     }
     else{
         do{ v->capacity *= 2; }while(v->capacity < n + v->length);
-        int *tmp = (int*) malloc(sizeof(int)*v->capacity), i;
+        float *tmp = (float*) malloc(sizeof(float)*v->capacity);
+        int i;
         for(i = 0; i < v->length; ++i){ tmp[i] = v->data[i]; }
         for(i = 0; i < n; ++i){ tmp[v->length+i] = arr[i]; }
         v->length += n;
@@ -65,26 +67,27 @@ void set_size(Vector *v, int cap){
     if(cap < 1){ return; }
     if(v->capacity < cap){
         v->capacity = cap;
-        int *tmp = (int*) malloc(sizeof(int)*cap), i;
+        float *tmp = (float*) malloc(sizeof(float)*cap);
+        int i;
         for(i = 0; i < v->length; ++i){ tmp[i] = v->data[i]; }
         free(v->data);
         v->data = tmp;
     }
     else if(v->capacity > cap){
-        v->data = realloc(v->data, sizeof(int)*cap);
+        v->data = realloc(v->data, sizeof(float)*cap);
         v->capacity = cap;
         if(v->length > cap){ v->length = cap; }
     }
 }
 
 void shrink(Vector *v){
-    v->data = realloc(v->data, sizeof(int)*v->length);
+    v->data = realloc(v->data, sizeof(float)*v->length);
     v->capacity = v->length;
 }
 
 Vector* veccpy(Vector *v){
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
-    tmp->data = (int*) malloc(sizeof(int)*v->capacity);
+    tmp->data = (float*) malloc(sizeof(float)*v->capacity);
     tmp->capacity = v->capacity;
     tmp->length = v->length;
     int i;
@@ -117,7 +120,7 @@ Vector* sum(int cnt, ...){
     if(cnt < 1){ exit(EXIT_FAILURE); }
     else if(cnt == 1){
         Vector *tmp = (Vector*) malloc(sizeof(Vector)); init(tmp);
-        push_int(tmp, 0);
+        push_float(tmp, 0);
         va_list args;
         va_start(args, cnt);
         Vector *t = va_arg(args, Vector*);
@@ -136,7 +139,7 @@ Vector* sum(int cnt, ...){
         Vector *tmp = (Vector*) malloc(sizeof(Vector)); init(tmp);
         set_size(tmp, l);
         for(i = 0; i < l; ++i){
-            push_int(tmp, 0);
+            push_float(tmp, 0);
             va_start(args, cnt);
             for(j = 0; j < cnt; ++j){
                 tmp->data[i] += va_arg(args, Vector*)->data[i];
@@ -154,7 +157,7 @@ Vector* sub(int cnt, ...){
         va_list args;
         va_start(args, cnt);
         Vector *t = va_arg(args, Vector*);
-        push_int(tmp, t->data[0]);
+        push_float(tmp, t->data[0]);
         int i;
         for(i = 1; i < t->length; ++i){ tmp->data[0] -= t->data[i]; }
         return tmp;
@@ -171,7 +174,7 @@ Vector* sub(int cnt, ...){
         set_size(tmp, l);
         for(i = 0; i < l; ++i){
             va_start(args, cnt);
-            push_int(tmp, va_arg(args, Vector*)->data[i]);
+            push_float(tmp, va_arg(args, Vector*)->data[i]);
             for(j = 1; j < cnt; ++j){
                 tmp->data[i] -= va_arg(args, Vector*)->data[i];
             }
@@ -185,7 +188,7 @@ Vector* mult(int cnt, ...){
     if(cnt < 1){ exit(EXIT_FAILURE); }
     else if(cnt == 1){
         Vector *tmp = (Vector*) malloc(sizeof(Vector)); init(tmp);
-        push_int(tmp, 1);
+        push_float(tmp, 1);
         va_list args;
         va_start(args, cnt);
         Vector *t = va_arg(args, Vector*);
@@ -204,7 +207,7 @@ Vector* mult(int cnt, ...){
         Vector *tmp = (Vector*) malloc(sizeof(Vector)); init(tmp);
         set_size(tmp, l);
         for(i = 0; i < l; ++i){
-            push_int(tmp, 1);
+            push_float(tmp, 1);
             va_start(args, cnt);
             for(j = 0; j < cnt; ++j){
                 tmp->data[i] *= va_arg(args, Vector*)->data[i];
@@ -215,10 +218,43 @@ Vector* mult(int cnt, ...){
     }
 }
 
+Vector* divide(int cnt, ...){
+    if(cnt < 1){ exit(EXIT_FAILURE); }
+    else if(cnt == 1){
+        Vector *tmp = (Vector*) malloc(sizeof(Vector)); init(tmp);
+        va_list args;
+        va_start(args, cnt);
+        Vector *t = va_arg(args, Vector*);
+        push_float(tmp, t->data[0]);
+        int i;
+        for(i = 1; i < t->length; ++i){ tmp->data[0] /= t->data[i]; }
+        return tmp;
+    }
+    else{
+        va_list args;
+        va_start(args, cnt);
+        int i, j, l = va_arg(args, Vector*)->length;
+        for(i = 1; i < cnt; ++i){
+            if(l != va_arg(args, Vector*)->length){ exit(EXIT_FAILURE); }
+        }
+        va_end(args);
+        Vector *tmp = (Vector*) malloc(sizeof(Vector)); init(tmp);
+        set_size(tmp, l);
+        for(i = 0; i < l; ++i){
+            va_start(args, cnt);
+            push_float(tmp, va_arg(args, Vector*)->data[i]);
+            for(j = 1; j < cnt; ++j){
+                tmp->data[i] /= va_arg(args, Vector*)->data[i];
+            }
+            va_end(args);
+        }
+        return tmp;
+    }
+}
 
-Vector* ksum(Vector *v, int k){
+Vector* ksum(Vector *v, float k){
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
-    tmp->data = (int*) malloc(sizeof(int)*v->length);
+    tmp->data = (float*) malloc(sizeof(float)*v->length);
     tmp->capacity = v->length;
     tmp->length = v->length;
     int i;
@@ -226,9 +262,9 @@ Vector* ksum(Vector *v, int k){
     return tmp;
 }
 
-Vector* kmult(Vector *v, int k){
+Vector* kmult(Vector *v, float k){
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
-    tmp->data = (int*) malloc(sizeof(int)*v->length);
+    tmp->data = (float*) malloc(sizeof(float)*v->length);
     tmp->capacity = v->length;
     tmp->length = v->length;
     int i;
@@ -236,9 +272,9 @@ Vector* kmult(Vector *v, int k){
     return tmp;
 }
 
-Vector* kpow(Vector *v, int k){
+Vector* kpow(Vector *v, float k){
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
-    tmp->data = (int*) malloc(sizeof(int)*v->length);
+    tmp->data = (float*) malloc(sizeof(float)*v->length);
     tmp->capacity = v->length;
     tmp->length = v->length;
     int i;
@@ -248,7 +284,8 @@ Vector* kpow(Vector *v, int k){
 
 int dot_prod(Vector *v1, Vector *v2){
     if(v1->length != v2->length){ exit(EXIT_FAILURE); }
-    int i, sum = 0;
+    float sum = 0;
+    int i;
     for(i = 0; i < v1->length; ++i){ sum += (v1->data[i] * v2->data[i]); }
     return sum;
 }
@@ -256,18 +293,18 @@ int dot_prod(Vector *v1, Vector *v2){
 void print(Vector *v, FILE *f){
     if(v->length < 1){ return; }
     int i;
-    fprintf(f, "%d", v->data[0]);
+    fprintf(f, "%f", v->data[0]);
     for(i = 1; i < v->length; ++i){
-        fprintf(f, " %d", v->data[i]);
+        fprintf(f, " %f", v->data[i]);
     }
 }
 
 void println(Vector *v, FILE *f){
     if(v->length < 1){ return; }
     int i;
-    fprintf(f, "%d", v->data[0]);
+    fprintf(f, "%f", v->data[0]);
     for(i = 1; i < v->length; ++i){
-        fprintf(f, " %d", v->data[i]);
+        fprintf(f, " %f", v->data[i]);
     }
     fprintf(f, "\n");
 }
