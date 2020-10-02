@@ -2,7 +2,7 @@
 Implementation of std::vector in C.
 
 ## Data structure
-```
+``` c
 typedef struct{
     float *data;     // Pointer to the array
     size_t capacity; // Actual capacity of the array
