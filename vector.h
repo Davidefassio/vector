@@ -46,7 +46,7 @@ void push_arr(Vector *v, int *arr, int n){
         v->length += n;
     }
     else{
-        v->capacity += n;
+        while(v->capacity < n){ v->capacity *= 2; }
         int *tmp = (int*) malloc(sizeof(int)*v->capacity), i;
         for(i = 0; i < v->length; ++i){ tmp[i] = v->data[i]; }
         for(i = 0; i < n; ++i){ tmp[v->length+i] = arr[i]; }
