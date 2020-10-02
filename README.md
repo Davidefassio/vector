@@ -11,8 +11,6 @@ typedef struct{
 ```
 
 ## Functions
-Aggiungere: println (FATTO), push_arr, sub (dal primo tolgo tutti gli altri), mult (moltiplico tutti), div (dal primo divido tutti gli altri), kmult (k * vec), dot_prod, kpow (vec^k), veccpy.
-
 ```void init(Vector*)``` \
 EVERY vector must be initialized using this function (recommended) or manually.
 
