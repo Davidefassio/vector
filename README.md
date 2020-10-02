@@ -76,7 +76,7 @@ Print on a file the vector. \
 To print on screen use as file pointer ```stdout```.
 
 ```void println(Vector*, FILE*)``` \
-Print on a file the vector and the new line character.
+Print on a file the vector and the new line character. \
 To print on screen use as file pointer ```stdout```.
 
 ## License
