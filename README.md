@@ -2,9 +2,9 @@
 Implementation of std::vector in C.
 
 ## Data structure
-``` C
+```
 typedef struct{
-    float *data;  // Pointer to the array
+    float *data;     // Pointer to the array
     size_t capacity; // Actual capacity of the array
     size_t length;   // Number of elements inserted (using push_int / push_arr)
 }Vector;
