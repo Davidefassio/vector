@@ -34,18 +34,24 @@ Reduce the capacity of the vector to match the length and so reducing the memory
 Copy a vector and return another istance equivalent in data, capacity and length.
 
 ```int isEqual(int cnt, ...)``` \
-Check if two vectors are equal in length and in the data, NOT in capacity. It return 0 (false) or 1 (true).
+cnt is the number of elements that follow.
+If cnt == 1 retrun 1 (true).
+If cnt > 1 check if the vectors have equal length and v1[i] == v2[i] == ... for each i. If it's true return 1, otherwise 0.
 
 ```Vector* sum(int cnt, ...)``` \
 cnt is the number of elements that follow.
 If cnt == 1 sum all the element of the vector and return a vector with length and capacity of 1 and data[0] that contains the sum.
-If cnt > 1 
+If cnt > 1 sum all the vectors element by element and return a vector with capacity equals to the length and data[i] = v1[i] + v2[i] + ...
 
 ```Vector* sub(int cnt, ...)``` \
-Sum two vectors and returns a vector already initialized containing the sum element by element.
+cnt is the number of elements that follow.
+If cnt == 1 subtract all the element of the vector to the first and return a vector with length and capacity of 1 and data[0] that contains the result.
+If cnt > 1 subtract all the vectors element by element to the first vector and return a vector with capacity equals to the length and data[i] = v1[i] - v2[i] - ...
 
 ```Vector* mult(int cnt, ...)``` \
-Sum two vectors and returns a vector already initialized containing the sum element by element.
+cnt is the number of elements that follow.
+If cnt == 1 multiply all the element of the vector by each other and return a vector with length and capacity of 1 and data[0] that contains the result.
+If cnt > 1 multiply all the vectors element by element by each other and return a vector with capacity equals to the length and data[i] = v1[i] * v2[i] * ...
 
 ```Vector* ksum(Vector*, int)``` \
 Sum the int given to all the elements of the vector, storing the result in the vector returned.
