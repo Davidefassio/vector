@@ -62,11 +62,11 @@ Sum two vectors and returns a vector already initialized containing the sum elem
 ```Vector* dot_prod(Vector*, Vector*)``` \
 Sum two vectors and returns a vector already initialized containing the sum element by element.
 
-```void print(Vector*, FILE*)``` 
+```void print(Vector*, FILE*)``` \
 Print on a file the vector.
 
-```void println(Vector*, FILE*)``` 
-Print on a file the vector.
+```void println(Vector*, FILE*)``` \
+Print on a file the vector and the new line character.
 
 ## License
 MIT License \
