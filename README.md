@@ -1,6 +1,5 @@
 # vector
 Implementation of std::vector in C.
-RIFARE TUTTO IN FLOAT PERCHE PASQUA HA RAGIONE
 
 ## Data structure
 ``` C
