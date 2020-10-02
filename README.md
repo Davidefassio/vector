@@ -47,20 +47,17 @@ Sum two vectors and returns a vector already initialized containing the sum elem
 ```Vector* mult(Vector*, Vector*)``` \
 Sum two vectors and returns a vector already initialized containing the sum element by element.
 
-```Vector* ksum(Vector*, Vector*)``` \
-Sum two vectors and returns a vector already initialized containing the sum element by element.
+```Vector* ksum(Vector*, int)``` \
+Sum the int given to all the elements of the vector, storing the result in the vector returned.
 
+```Vector* kmult(Vector*, int)``` \
+Multiply the int given by all the elements of the vector, storing the result in the vector returned.
 
-```Vector* kmult(Vector*, Vector*)``` \
-Sum two vectors and returns a vector already initialized containing the sum element by element.
+```Vector* kpow(Vector*, int)``` \
+Elevate to the int given all the elements of the vector, storing the result in the vector returned.
 
-
-```Vector* kpow(Vector*, Vector*)``` \
-Sum two vectors and returns a vector already initialized containing the sum element by element.
-
-
-```Vector* dot_prod(Vector*, Vector*)``` \
-Sum two vectors and returns a vector already initialized containing the sum element by element.
+```int dot_prod(Vector*, Vector*)``` \
+Dot product between two vectors of the same length. Return an int containing the result.
 
 ```void print(Vector*, FILE*)``` \
 Print on a file the vector.
