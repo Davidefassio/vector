@@ -13,6 +13,7 @@ typedef struct{
 ## Functions
 ```void init(Vector*)``` \
 EVERY vector must be initialized using this function (recommended) or manually.
+Vector returned by other functions of this library are already initialized.
 
 ```void push_int(Vector*, int)``` \
 Append a number (int) at the end of the vector, if it exceeds the capacity it's resized automatically doubling the capacity. 
