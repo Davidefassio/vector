@@ -87,7 +87,7 @@ Copyright (c) 2020 Davide Fassio
 Davide Fassio.
 
 ## TODO
-Aggiungere codice di test esaustivo per tutte le funzioni. \
-Controllare che tutta la doc sia corretta e aggiornata. \
-Capire se ksum, kmult, kpow debbano modificare il vettore passato o crearne uno nuovo.
+[ ] Aggiungere codice di test esaustivo per tutte le funzioni. \
+[ ] Controllare che tutta la doc sia corretta e aggiornata. \
+[ ] Capire se ksum, kmult, kpow debbano modificare il vettore passato o crearne uno nuovo.
 
