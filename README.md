@@ -94,7 +94,7 @@ Print on a file the vector and the new line character. \
 To print on screen use as file pointer ```stdout```.
 
 ```void debug(Vector*, FILE*)``` \
-Print all the information about the vector.\
+Print on a file all the information about the vector.\
 To print on screen use as file pointer ```stdout```.\
 Example:
 ``` Plain text
