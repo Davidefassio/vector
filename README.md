@@ -93,6 +93,19 @@ To print on screen use as file pointer ```stdout```.
 Print on a file the vector and the new line character. \
 To print on screen use as file pointer ```stdout```.
 
+```void debug(Vector*, FILE*)``` \
+Print all the information about the vector.\
+To print on screen use as file pointer ```stdout```.\
+Example:
+``` Plain text
+### DEBUG ###
+Vector pointer: 0061FEF0
+Data pointer: 00712258
+Capacity: 2
+Length: 2
+2.500000 1.700000
+```
+
 ## License
 MIT License \
 Copyright (c) 2020 Davide Fassio
