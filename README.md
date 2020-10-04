@@ -17,9 +17,9 @@ Vector returned by other functions of this library are already initialized. \
 Creating a standard Vector and initialize it.
 ``` c
 Vector v1;
-init(&v1);
+init(&v1); // All the funztion require a pointer to a vector so use &
 ```
-Creating a pointer to vector and initialize it (recommended). \
+Creating a pointer to vector and initialize it (recommended).
 ``` c
 Vector* v2 = NULL; // It's crucial the initialization to NULL
 v2 = init(v2);     // Note that's the only case where you must catch the return of init.
@@ -27,7 +27,7 @@ v2 = init(v2);     // Note that's the only case where you must catch the return 
 Allocating a pointer to vector and initialize it.
 ``` c
 Vector* v3= (Vector*) malloc(sizeof(Vector));
-init(v3);
+init(v3);  // No need to catch the return of init
 ```
 ```void push_float(Vector*, float)``` \
 Append a number (float) at the end of the vector, if it exceeds the capacity it's resized automatically doubling the capacity. 
