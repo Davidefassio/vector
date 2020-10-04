@@ -1,5 +1,5 @@
 # vector
-Implementation of std::vector in C.
+Implementation of std::vector in C in a header library.
 
 ## Data structure
 ``` c
