@@ -17,7 +17,15 @@ typedef struct{
     size_t length;
 }Vector;
 
-void init(Vector *v){
+Vector* init(Vector *v){
+    if(v == NULL){
+        v = (Vector*) malloc(sizeof(Vector));
+        if(v == NULL){
+            printf("An error occurred during allocation of memory.\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+
     v->data = (float*) malloc(sizeof(float));
     if(v->data == NULL){
         printf("An error occurred during allocation of memory.\n");
@@ -25,9 +33,15 @@ void init(Vector *v){
     }
     v->capacity = 1;
     v->length = 0;
+    return v;
 }
 
 void push_float(Vector *v, float n){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     if(v->length < v->capacity){
         v->data[v->length] = n;
         ++v->length;
@@ -47,6 +61,15 @@ void push_float(Vector *v, float n){
 }
 
 void push_arr(Vector *v, float *arr, size_t n){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+    if(arr == NULL){
+        printf("The pointer to float points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     if(v->length + n < v->capacity){
         size_t i;
         for(i = 0; i < n; ++i){
@@ -74,10 +97,19 @@ void push_arr(Vector *v, float *arr, size_t n){
 }
 
 void pop(Vector *v, size_t n){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
     v->length = (v->length > n) ? v->length - n : 0;
 }
 
 void set_size(Vector *v, size_t cap){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     if(cap < 1){
         printf("The capacity must be greater than 0.\n");
         return;
@@ -100,6 +132,11 @@ void set_size(Vector *v, size_t cap){
 }
 
 void shrink(Vector *v){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     size_t l = v->length;
     if(v->length == 0){
         l = 1;
@@ -114,6 +151,11 @@ void shrink(Vector *v){
 }
 
 Vector* veccpy(Vector *v){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
     if(tmp == NULL){
         printf("An error occurred during allocation of memory.\n");
@@ -400,6 +442,11 @@ Vector* divide(size_t cnt, ...){
 }
 
 Vector* ksum(Vector *v, float k){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
     if(tmp == NULL){
         printf("An error occurred during allocation of memory.\n");
@@ -423,6 +470,11 @@ Vector* ksum(Vector *v, float k){
 }
 
 Vector* kmult(Vector *v, float k){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
     if(tmp == NULL){
         printf("An error occurred during allocation of memory.\n");
@@ -446,6 +498,11 @@ Vector* kmult(Vector *v, float k){
 }
 
 Vector* kpow(Vector *v, float k){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
     if(tmp == NULL){
         printf("An error occurred during allocation of memory.\n");
@@ -469,6 +526,15 @@ Vector* kpow(Vector *v, float k){
 }
 
 int dot_prod(Vector *v1, Vector *v2){
+    if(v1 == NULL){
+        printf("The pointer to vector (v1) points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+    if(v2 == NULL){
+        printf("The pointer to vector (v2) points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     if(v1->length != v2->length){
         printf("The vectors must have the same length.\n");
         exit(EXIT_FAILURE);
@@ -484,6 +550,14 @@ int dot_prod(Vector *v1, Vector *v2){
 }
 
 void print(Vector *v, FILE *f){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+    if(f == NULL){
+        fprintf(stderr, "The pointer to file points to NULL.\n");
+    }
+
     if(v->length < 1){
         return;
     }
@@ -496,6 +570,14 @@ void print(Vector *v, FILE *f){
 }
 
 void println(Vector *v, FILE *f){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+    if(f == NULL){
+        fprintf(stderr, "The pointer to file points to NULL.\n");
+    }
+
     if(v->length < 1){
         return;
     }
@@ -506,6 +588,18 @@ void println(Vector *v, FILE *f){
         fprintf(f, " %f", v->data[i]);
     }
     fprintf(f, "\n");
+}
+
+void debug(Vector *v){
+    printf("Vector pointer: %p\n", v);
+    printf("Data pointer: %p\n", v->data);
+    printf("Capacity: %u. Length: %u\n", v->capacity, v->length);
+    size_t i;
+    printf("%f", v->data[0]);
+    for(i = 1; i < v->length; ++i){
+        printf(" %f", v->data[i]);
+    }
+    printf("\n");
 }
 
 #endif // VECTOR_H_INCLUDED
