@@ -13,17 +13,18 @@ typedef struct{
 ## Functions
 ```Vector* init(Vector*)``` \
 EVERY vector must be initialized using this function (recommended) or manually. \
-Vector returned by other functions of this library are already initialized.
+Vector returned by other functions of this library are already initialized. \
+Creating a standard Vector and initialize it.
 ``` c
 Vector v1;
 init(&v1);
 ```
-
+Creating a pointer to vector and initialize it (recommended). \
 ``` c
-Vector* v2 = NULL;
-v2 = init(v2);
+Vector* v2 = NULL; // It's crucial the initialization to NULL
+v2 = init(v2);     // Note that's the only case where you must catch the return of init.
 ```
-
+Allocating a pointer to vector and initialize it.
 ``` c
 Vector* v3= (Vector*) malloc(sizeof(Vector));
 init(v3);
