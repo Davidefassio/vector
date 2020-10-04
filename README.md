@@ -100,10 +100,10 @@ Example:
 ``` Plain text
 ### DEBUG ###
 Vector pointer: 0061FEF0
-Data pointer: 00712258
-Capacity: 2
-Length: 2
-2.500000 1.700000
+Data pointer: 006B2258
+Capacity: 4
+Length: 3
+2.500000 1.700000 0.010000
 ```
 
 ## License
