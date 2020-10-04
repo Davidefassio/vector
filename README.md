@@ -11,10 +11,22 @@ typedef struct{
 ```
 
 ## Functions
-```void init(Vector*)``` \
-EVERY vector must be initialized using this function (recommended) or manually.
-Vector returned by other functions of this library are already initialized.
+```Vector* init(Vector*)``` \
+EVERY vector must be initialized using this function (recommended) or manually. \
+Vector returned by other functions of this library are already initialized. \
+``` c
+Vector v1;
+init(&v1);
+```
 
+``` c
+Vector* v2;
+v2 = init(v2);
+```
+
+``` c
+Vector* v3= (Vector*) malloc(sizeof(Vector));
+init(v3);
 ```void push_float(Vector*, float)``` \
 Append a number (float) at the end of the vector, if it exceeds the capacity it's resized automatically doubling the capacity. 
 
