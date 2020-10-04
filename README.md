@@ -20,7 +20,7 @@ init(&v1);
 ```
 
 ``` c
-Vector* v2;
+Vector* v2 = NULL;
 v2 = init(v2);
 ```
 
