@@ -27,6 +27,7 @@ v2 = init(v2);
 ``` c
 Vector* v3= (Vector*) malloc(sizeof(Vector));
 init(v3);
+```
 ```void push_float(Vector*, float)``` \
 Append a number (float) at the end of the vector, if it exceeds the capacity it's resized automatically doubling the capacity. 
 
