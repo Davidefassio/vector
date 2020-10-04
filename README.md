@@ -13,7 +13,7 @@ typedef struct{
 ## Functions
 ```Vector* init(Vector*)``` \
 EVERY vector must be initialized using this function (recommended) or manually. \
-Vector returned by other functions of this library are already initialized. \
+Vector returned by other functions of this library are already initialized.
 ``` c
 Vector v1;
 init(&v1);
