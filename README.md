@@ -74,14 +74,14 @@ cnt is the number of elements that follows. \
 If cnt == 1 divide the first element by all the others and return a vector with length and capacity of 1 and data[0] that contains the result. \
 If cnt > 1 divide the first vector element by element by all others and return a vector with capacity equals to the length and data[i] = v1[i] / v2[i] / ...
 
-#### ```Vector* ksum(Vector*, float)```
-Sum the float given to all the elements of the vector, storing the result in the vector returned.
+#### ```void ksum(Vector*, float)```
+Sum the float given to all the elements of the vector, modifying the vector.
 
-#### ```Vector* kmult(Vector*, float)```
-Multiply the float given by all the elements of the vector, storing the result in the vector returned.
+#### ```void kmult(Vector*, float)```
+Multiply the float given by all the elements of the vector, modifying the vector.
 
-#### ```Vector* kpow(Vector*, float)```
-Elevate to the float given all the elements of the vector, storing the result in the vector returned.
+#### ```void kpow(Vector*, float)```
+Elevate to the float given all the elements of the vector, modifying the vector.
 
 #### ```float dot_prod(Vector*, Vector*)```
 Dot product between two vectors of the same length. Return a float containing the result.
