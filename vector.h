@@ -468,88 +468,40 @@ Vector* divide(size_t cnt, ...){
     }
 }
 
-Vector* ksum(Vector *v, float k){
+void ksum(Vector *v, float k){
     if(v == NULL){
         printf("The pointer to vector points to NULL.\n");
         exit(EXIT_FAILURE);
     }
     
-    Vector *tmp = (Vector*) malloc(sizeof(Vector));
-    if(tmp == NULL){
-        printf("An error occurred during allocation of memory.\n");
-        exit(EXIT_FAILURE);
-    }
-    
-    tmp->data = (float*) malloc(sizeof(float)*v->length);
-    if(tmp->data == NULL){
-        printf("An error occurred during allocation of memory.\n");
-        exit(EXIT_FAILURE);
-    }
-    
-    tmp->capacity = v->length;
-    tmp->length = v->length;
     size_t i;
     for(i = 0; i < v->length; ++i){
-        tmp->data[i] = v->data[i] + k;
+        v->data[i] += k;
     }
-    
-    return tmp;
 }
 
-Vector* kmult(Vector *v, float k){
+void kmult(Vector *v, float k){
     if(v == NULL){
         printf("The pointer to vector points to NULL.\n");
         exit(EXIT_FAILURE);
     }
     
-    Vector *tmp = (Vector*) malloc(sizeof(Vector));
-    if(tmp == NULL){
-        printf("An error occurred during allocation of memory.\n");
-        exit(EXIT_FAILURE);
-    }
-    
-    tmp->data = (float*) malloc(sizeof(float)*v->length);
-    if(tmp->data == NULL){
-        printf("An error occurred during allocation of memory.\n");
-        exit(EXIT_FAILURE);
-    }
-    
-    tmp->capacity = v->length;
-    tmp->length = v->length;
     size_t i;
     for(i = 0; i < v->length; ++i){
-        tmp->data[i] = v->data[i] * k;
+        v->data[i] *= k;
     }
-    
-    return tmp;
 }
 
-Vector* kpow(Vector *v, float k){
+void kpow(Vector *v, float k){
     if(v == NULL){
         printf("The pointer to vector points to NULL.\n");
         exit(EXIT_FAILURE);
     }
     
-    Vector *tmp = (Vector*) malloc(sizeof(Vector));
-    if(tmp == NULL){
-        printf("An error occurred during allocation of memory.\n");
-        exit(EXIT_FAILURE);
-    }
-    
-    tmp->data = (float*) malloc(sizeof(float)*v->length);
-    if(tmp->data == NULL){
-        printf("An error occurred during allocation of memory.\n");
-        exit(EXIT_FAILURE);
-    }
-    
-    tmp->capacity = v->length;
-    tmp->length = v->length;
     size_t i;
     for(i = 0; i < v->length; ++i){
-        tmp->data[i] = pow(v->data[i], k);
+        v->data[i] = pow(v->data[i], k);
     }
-    
-    return tmp;
 }
 
 int dot_prod(Vector *v1, Vector *v2){
