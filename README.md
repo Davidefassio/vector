@@ -116,7 +116,6 @@ Davide Fassio.
 
 ## TODO
 - [ ] Aggiungere sort (quicksort).
-- [ ] min, max.
 - [ ] Aggiungere codice di test esaustivo per tutte le funzioni.
 - [ ] Aggiungere codice d'esempio o nella doc o nella repo.
 - [ ] Controllare che tutta la doc sia corretta e aggiornata.
