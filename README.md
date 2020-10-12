@@ -115,9 +115,9 @@ Copyright (c) 2020 Davide Fassio
 Davide Fassio.
 
 ## TODO
-- [ ] Aggiungere reverse, sort (quicksort).
+- [ ] Aggiungere sort (quicksort).
 - [ ] min, max.
 - [ ] Aggiungere codice di test esaustivo per tutte le funzioni.
 - [ ] Aggiungere codice d'esempio o nella doc o nella repo.
 - [ ] Controllare che tutta la doc sia corretta e aggiornata.
-- [ ] Capire se ksum, kmult, kpow debbano modificare il vettore passato o crearne uno nuovo.
+- [ ] Capire se ksum, kmult, kpow debbano modificare il vettore passato o crearne uno nuovo. (modificano, se voglio farne uno nuovo uso veccpy e passo il vettore copiato a kfunc).
