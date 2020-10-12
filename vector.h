@@ -26,7 +26,7 @@ Vector* init(Vector *v){
             exit(EXIT_FAILURE);
         }
     }
-
+    
     v->data = (float*) malloc(sizeof(float));
     if(v->data == NULL){
         printf("An error occurred during allocation of memory.\n");
@@ -42,20 +42,20 @@ void push_float(Vector *v, float n){
         printf("The pointer to vector points to NULL.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     if(v->length < v->capacity){
         v->data[v->length] = n;
         ++v->length;
     }
     else{
         v->capacity *= 2;
-
+        
         v->data = realloc(v->data, sizeof(float)*v->capacity);
         if(v->data == NULL){
             printf("An error occurred during allocation of memory.\n");
             exit(EXIT_FAILURE);
         }
-
+        
         v->data[v->length] = n;
         ++v->length;
     }
@@ -70,7 +70,7 @@ void push_arr(Vector *v, float *arr, size_t n){
         printf("The pointer to float points to NULL.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     if(v->length + n < v->capacity){
         size_t i;
         for(i = 0; i < n; ++i){
@@ -82,13 +82,13 @@ void push_arr(Vector *v, float *arr, size_t n){
         do{
             v->capacity *= 2;
         } while(v->capacity < n + v->length);
-
+        
         v->data = realloc(v->data, sizeof(float)*v->capacity);
         if(v->data == NULL){
             printf("An error occurred during allocation of memory.\n");
             exit(EXIT_FAILURE);
         }
-
+        
         size_t i;
         for(i = 0; i < n; ++i){
             v->data[v->length+i] = arr[i];
@@ -114,7 +114,7 @@ Vector* vecrand(size_t num, float min, float max){
     
     tmp->capacity = tmp->length = num;
     
-    int i;
+    size_t i;
     for(i = 0; i < num; ++i){
         tmp->data[i] = min + (rand()/(float) RAND_MAX) * (max - min);
     }
@@ -135,22 +135,22 @@ void set_size(Vector *v, size_t cap){
         printf("The pointer to vector points to NULL.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     if(cap < 1){
         printf("The capacity must be greater than 0.\n");
         return;
     }
-
+    
     if(v->capacity == cap){
         return;
     }
-
+    
     v->data = realloc(v->data, sizeof(float)*cap);
     if(v->data == NULL){
         printf("An error occurred during allocation of memory.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     v->capacity = cap;
     if(v->length > cap){
         v->length = cap;
@@ -162,12 +162,12 @@ void shrink(Vector *v){
         printf("The pointer to vector points to NULL.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     size_t l = v->length;
     if(v->length == 0){
         l = 1;
     }
-
+    
     v->data = realloc(v->data, sizeof(float)*l);
     if(v->data == NULL){
         printf("An error occurred during allocation of memory.\n");
@@ -181,26 +181,26 @@ Vector* veccpy(Vector *v){
         printf("The pointer to vector points to NULL.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
     if(tmp == NULL){
         printf("An error occurred during allocation of memory.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     tmp->data = (float*) malloc(sizeof(float)*v->capacity);
     if(tmp->data == NULL){
         printf("An error occurred during allocation of memory.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     tmp->capacity = v->capacity;
     tmp->length = v->length;
     size_t i;
     for(i = 0; i < v->length; ++i){
         tmp->data[i] = v->data[i];
     }
-
+    
     return tmp;
 }
 
@@ -212,19 +212,19 @@ int isEqual(size_t cnt, ...){
     if(cnt == 1) {
         return 1;
     }
-
+    
     va_list args;
     va_start(args, cnt);
     float c;
     size_t i, j, l = va_arg(args, Vector*)->length;
-
+    
     for(i = 1; i < cnt; ++i){
         if(l != va_arg(args, Vector*)->length){
             return 0;
         }
     }
     va_end(args);
-
+    
     for(i = 0; i < l; ++i){
         va_start(args, cnt);
         c = va_arg(args, Vector*)->data[i];
@@ -235,7 +235,7 @@ int isEqual(size_t cnt, ...){
         }
         va_end(args);
     }
-
+    
     return 1;
 }
 
@@ -252,7 +252,7 @@ Vector* sum(size_t cnt, ...){
         }
         init(tmp);
         push_float(tmp, 0);
-
+        
         va_list args;
         va_start(args, cnt);
         Vector *t = va_arg(args, Vector*);
@@ -260,7 +260,7 @@ Vector* sum(size_t cnt, ...){
         for(i = 0; i < t->length; ++i){
             tmp->data[0] += t->data[i];
         }
-
+        
         return tmp;
     }
     else{
@@ -274,7 +274,7 @@ Vector* sum(size_t cnt, ...){
             }
         }
         va_end(args);
-
+        
         Vector *tmp = (Vector*) malloc(sizeof(Vector));
         if(tmp == NULL){
             printf("An error occurred during allocation of memory.\n");
@@ -282,7 +282,7 @@ Vector* sum(size_t cnt, ...){
         }
         init(tmp);
         set_size(tmp, l);
-
+        
         for(i = 0; i < l; ++i){
             push_float(tmp, 0);
             va_start(args, cnt);
@@ -291,7 +291,7 @@ Vector* sum(size_t cnt, ...){
             }
             va_end(args);
         }
-
+        
         return tmp;
     }
 }
@@ -308,7 +308,7 @@ Vector* sub(size_t cnt, ...){
             exit(EXIT_FAILURE);
         }
         init(tmp);
-
+        
         va_list args;
         va_start(args, cnt);
         Vector *t = va_arg(args, Vector*);
@@ -317,7 +317,7 @@ Vector* sub(size_t cnt, ...){
         for(i = 1; i < t->length; ++i){
             tmp->data[0] -= t->data[i];
         }
-
+        
         return tmp;
     }
     else{
@@ -331,7 +331,7 @@ Vector* sub(size_t cnt, ...){
             }
         }
         va_end(args);
-
+        
         Vector *tmp = (Vector*) malloc(sizeof(Vector));
         if(tmp == NULL){
             printf("An error occurred during allocation of memory.\n");
@@ -339,7 +339,7 @@ Vector* sub(size_t cnt, ...){
         }
         init(tmp);
         set_size(tmp, l);
-
+        
         for(i = 0; i < l; ++i){
             va_start(args, cnt);
             push_float(tmp, va_arg(args, Vector*)->data[i]);
@@ -348,7 +348,7 @@ Vector* sub(size_t cnt, ...){
             }
             va_end(args);
         }
-
+        
         return tmp;
     }
 }
@@ -366,7 +366,7 @@ Vector* mult(size_t cnt, ...){
         }
         init(tmp);
         push_float(tmp, 1);
-
+        
         va_list args;
         va_start(args, cnt);
         Vector *t = va_arg(args, Vector*);
@@ -374,7 +374,7 @@ Vector* mult(size_t cnt, ...){
         for(i = 0; i < t->length; ++i){
             tmp->data[0] *= t->data[i];
         }
-
+        
         return tmp;
     }
     else{
@@ -388,7 +388,7 @@ Vector* mult(size_t cnt, ...){
             }
         }
         va_end(args);
-
+        
         Vector *tmp = (Vector*) malloc(sizeof(Vector));
         if(tmp == NULL){
             printf("An error occurred during allocation of memory.\n");
@@ -396,7 +396,7 @@ Vector* mult(size_t cnt, ...){
         }
         init(tmp);
         set_size(tmp, l);
-
+        
         for(i = 0; i < l; ++i){
             push_float(tmp, 1);
             va_start(args, cnt);
@@ -405,7 +405,7 @@ Vector* mult(size_t cnt, ...){
             }
             va_end(args);
         }
-
+        
         return tmp;
     }
 }
@@ -422,7 +422,7 @@ Vector* divide(size_t cnt, ...){
             exit(EXIT_FAILURE);
         }
         init(tmp);
-
+        
         va_list args;
         va_start(args, cnt);
         Vector *t = va_arg(args, Vector*);
@@ -431,7 +431,7 @@ Vector* divide(size_t cnt, ...){
         for(i = 1; i < t->length; ++i){
             tmp->data[0] /= t->data[i];
         }
-
+        
         return tmp;
     }
     else{
@@ -445,7 +445,7 @@ Vector* divide(size_t cnt, ...){
             }
         }
         va_end(args);
-
+        
         Vector *tmp = (Vector*) malloc(sizeof(Vector));
         if(tmp == NULL){
             printf("An error occurred during allocation of memory.\n");
@@ -453,7 +453,7 @@ Vector* divide(size_t cnt, ...){
         }
         init(tmp);
         set_size(tmp, l);
-
+        
         for(i = 0; i < l; ++i){
             va_start(args, cnt);
             push_float(tmp, va_arg(args, Vector*)->data[i]);
@@ -462,7 +462,7 @@ Vector* divide(size_t cnt, ...){
             }
             va_end(args);
         }
-
+        
         return tmp;
     }
 }
@@ -472,26 +472,26 @@ Vector* ksum(Vector *v, float k){
         printf("The pointer to vector points to NULL.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
     if(tmp == NULL){
         printf("An error occurred during allocation of memory.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     tmp->data = (float*) malloc(sizeof(float)*v->length);
     if(tmp->data == NULL){
         printf("An error occurred during allocation of memory.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     tmp->capacity = v->length;
     tmp->length = v->length;
     size_t i;
     for(i = 0; i < v->length; ++i){
         tmp->data[i] = v->data[i] + k;
     }
-
+    
     return tmp;
 }
 
@@ -500,26 +500,26 @@ Vector* kmult(Vector *v, float k){
         printf("The pointer to vector points to NULL.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
     if(tmp == NULL){
         printf("An error occurred during allocation of memory.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     tmp->data = (float*) malloc(sizeof(float)*v->length);
     if(tmp->data == NULL){
         printf("An error occurred during allocation of memory.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     tmp->capacity = v->length;
     tmp->length = v->length;
     size_t i;
     for(i = 0; i < v->length; ++i){
         tmp->data[i] = v->data[i] * k;
     }
-
+    
     return tmp;
 }
 
@@ -528,26 +528,26 @@ Vector* kpow(Vector *v, float k){
         printf("The pointer to vector points to NULL.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     Vector *tmp = (Vector*) malloc(sizeof(Vector));
     if(tmp == NULL){
         printf("An error occurred during allocation of memory.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     tmp->data = (float*) malloc(sizeof(float)*v->length);
     if(tmp->data == NULL){
         printf("An error occurred during allocation of memory.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     tmp->capacity = v->length;
     tmp->length = v->length;
     size_t i;
     for(i = 0; i < v->length; ++i){
         tmp->data[i] = pow(v->data[i], k);
     }
-
+    
     return tmp;
 }
 
@@ -560,18 +560,18 @@ int dot_prod(Vector *v1, Vector *v2){
         printf("The pointer to vector (v2) points to NULL.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     if(v1->length != v2->length){
         printf("The vectors must have the same length.\n");
         exit(EXIT_FAILURE);
     }
-
+    
     float sum = 0;
     size_t i;
     for(i = 0; i < v1->length; ++i){
         sum += (v1->data[i] * v2->data[i]);
     }
-
+    
     return sum;
 }
 
@@ -583,11 +583,11 @@ void print(Vector *v, FILE *f){
     if(f == NULL){
         fprintf(stderr, "The pointer to file points to NULL.\n");
     }
-
+    
     if(v->length < 1){
         return;
     }
-
+    
     size_t i;
     fprintf(f, "%f", v->data[0]);
     for(i = 1; i < v->length; ++i){
@@ -603,11 +603,11 @@ void println(Vector *v, FILE *f){
     if(f == NULL){
         fprintf(stderr, "The pointer to file points to NULL.\n");
     }
-
+    
     if(v->length < 1){
         return;
     }
-
+    
     size_t i;
     fprintf(f, "%f", v->data[0]);
     for(i = 1; i < v->length; ++i){
@@ -616,16 +616,24 @@ void println(Vector *v, FILE *f){
     fprintf(f, "\n");
 }
 
-void debug(Vector *v){
-    printf("Vector pointer: %p\n", v);
-    printf("Data pointer: %p\n", v->data);
-    printf("Capacity: %u. Length: %u\n", v->capacity, v->length);
-    size_t i;
-    printf("%f", v->data[0]);
-    for(i = 1; i < v->length; ++i){
-        printf(" %f", v->data[i]);
+void debug(Vector *v, FILE *f){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
     }
-    printf("\n");
+    if(f == NULL){
+        fprintf(stderr, "The pointer to file points to NULL.\n");
+    }
+    
+    fprintf(f, "Vector pointer: %p\n", v);
+    fprintf(f, "Data pointer: %p\n", v->data);
+    fprintf(f, "Capacity: %zu. Length: %zu\n", v->capacity, v->length);
+    size_t i;
+    fprintf(f, "%f", v->data[0]);
+    for(i = 1; i < v->length; ++i){
+        fprintf(f, " %f", v->data[i]);
+    }
+    fprintf(f, "\n");
 }
 
 #endif // VECTOR_H_INCLUDED
