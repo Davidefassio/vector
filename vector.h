@@ -96,6 +96,31 @@ void push_arr(Vector *v, float *arr, size_t n){
     }
 }
 
+Vector* vecrand(size_t num, float min, float max){
+    srand((unsigned int) time(0));
+    
+    Vector *tmp = (Vector*) malloc(sizeof(Vector));
+    if(tmp == NULL){
+        printf("An error occurred during allocation of memory.\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    tmp->data = (float*) malloc(sizeof(float)*num);
+    if(tmp->data == NULL){
+        printf("An error occurred during allocation of memory.\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    tmp->capacity = tmp->length = num;
+    
+    int i;
+    for(i = 0; i < num; ++i){
+        tmp->data[i] = min + (rand()/(float) RAND_MAX) * (max - min);
+    }
+    
+    return tmp;
+}
+
 void pop(Vector *v, size_t n){
     if(v == NULL){
         printf("The pointer to vector points to NULL.\n");
