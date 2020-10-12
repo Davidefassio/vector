@@ -10,6 +10,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 
 typedef struct{
     float *data;
