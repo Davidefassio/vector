@@ -91,6 +91,7 @@ Dot product between two vectors of the same length. Return a float containing th
 
 #### ```void sort(Vector*, float* ())``` TODO
 Sort the vector using the func passed as compare function.
+It uses the qsort function defined in <stdlib.h>.
 The function passed must take two floats as input and return: -1, 0 or 1.
 
 #### ```void reverse(Vector*)```
