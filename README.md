@@ -115,6 +115,7 @@ Copyright (c) 2020 Davide Fassio
 Davide Fassio.
 
 ## TODO
+- [ ] Aggiungere reverse, sort (quicksort).
 - [ ] Aggiungere codice di test esaustivo per tutte le funzioni.
 - [ ] Aggiungere codice d'esempio o nella doc o nella repo.
 - [ ] Controllare che tutta la doc sia corretta e aggiornata.
