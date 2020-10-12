@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
+#include <float.h>
 
 typedef struct{
     float *data;
@@ -573,6 +574,56 @@ int dot_prod(Vector *v1, Vector *v2){
     }
     
     return sum;
+}
+
+void reverse(Vector *v){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    size_t i;
+    float tmp;
+    
+    for(i = 0; i < v->length / 2; ++i){
+        tmp = v->data[i];
+        v->data[i] = v->data[v->length-i-1];
+        v->data[v->length-i-1] = tmp;
+    }
+}
+
+float max(Vector *v){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    size_t i;
+    float max = FLT_MIN;
+    
+    for(i = 0; i < v->length; ++i){
+        if(v->data[i] > max){
+            max = v->data[i];
+        }
+    }
+    return max;
+}
+
+float min(Vector *v){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    size_t i;
+    float min = FLT_MAX;
+    
+    for(i = 0; i < v->length; ++i){
+        if(v->data[i] < min){
+            min = v->data[i];
+        }
+    }
+    return min;
 }
 
 void print(Vector *v, FILE *f){
