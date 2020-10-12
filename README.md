@@ -116,7 +116,7 @@ Davide Fassio.
 
 ## TODO
 - [ ] Aggiungere reverse, sort (quicksort).
-- [ ] vecrand(numero elementi, min, max).
+- [ ] min, max.
 - [ ] Aggiungere codice di test esaustivo per tutte le funzioni.
 - [ ] Aggiungere codice d'esempio o nella doc o nella repo.
 - [ ] Controllare che tutta la doc sia corretta e aggiornata.
