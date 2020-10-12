@@ -504,7 +504,7 @@ void kpow(Vector *v, float k){
     }
 }
 
-int dot_prod(Vector *v1, Vector *v2){
+float dot_prod(Vector *v1, Vector *v2){
     if(v1 == NULL){
         printf("The pointer to vector (v1) points to NULL.\n");
         exit(EXIT_FAILURE);
