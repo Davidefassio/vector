@@ -37,6 +37,7 @@ Append a number (float) at the end of the vector, if it exceeds the capacity it'
 Append an array of float of length n at the end of the vector, if it exceeds the capacity it's resized automatically doubling it until it fit.
 
 #### ```Vector* vecrand(size_t, float, float)```
+Create, initialze and return a vector of length n filled with random float between min and max.
 
 #### ```void pop(Vector*, size_t)```
 Delete the last n elements of the vector. The capacity remain unchaged.
@@ -89,10 +90,13 @@ Elevate to the float given all the elements of the vector, modifying the vector.
 Dot product between two vectors of the same length. Return a float containing the result.
 
 #### ```void reverse(Vector*)```
+Reverse the vector passed.
 
 #### ```float max(Vector*)```
+Return the max value in the vector passed.
 
 #### ```float min(Vector*)```
+Return the minimum value in the vector passed.
 
 #### ```void print(Vector*, FILE*)```
 Print on a file the vector. \
