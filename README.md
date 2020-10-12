@@ -34,7 +34,9 @@ init(v3);  // No need to catch the return of init
 Append a number (float) at the end of the vector, if it exceeds the capacity it's resized automatically doubling the capacity. 
 
 #### ```void push_arr(Vector*, float*, size_t)```
-Append an array of float of length n at the end of the vector, if it exceeds the capacity it's resized automatically doubling it until it fit. 
+Append an array of float of length n at the end of the vector, if it exceeds the capacity it's resized automatically doubling it until it fit.
+
+#### ```Vector* vecrand(size_t, float, float)```
 
 #### ```void pop(Vector*, size_t)```
 Delete the last n elements of the vector. The capacity remain unchaged.
@@ -85,6 +87,12 @@ Elevate to the float given all the elements of the vector, modifying the vector.
 
 #### ```float dot_prod(Vector*, Vector*)```
 Dot product between two vectors of the same length. Return a float containing the result.
+
+#### ```void reverse(Vector*)```
+
+#### ```float max(Vector*)```
+
+#### ```float min(Vector*)```
 
 #### ```void print(Vector*, FILE*)```
 Print on a file the vector. \
