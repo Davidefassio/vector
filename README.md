@@ -14,7 +14,7 @@ typedef struct{
 #### ```Vector* init(Vector*)```
 EVERY vector must be initialized using this function (recommended) or manually. \
 Vector returned by other functions of this library are already initialized. \
-Passing already initialized vector to init can cause memory leaks.
+Passing an already initialized vector to init can cause memory leaks.
  - Creating a standard Vector and initialize it.
 ``` c
 Vector v1;
