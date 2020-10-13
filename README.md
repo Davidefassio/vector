@@ -22,12 +22,12 @@ init(&v1); // All the functions require a pointer to a vector so use &
 ```
  - Declaring a pointer to vector and initialize it (recommended).
 ``` c
-Vector* v2 = NULL; // It's crucial the initialization to NULL
+Vector *v2 = NULL; // It's crucial the initialization to NULL
 v2 = init(v2);     // Note that's the only case where you must catch the return of init.
 ```
  - Allocating a pointer to vector and initialize it.
 ``` c
-Vector* v3 = (Vector*) malloc(sizeof(Vector));
+Vector *v3 = (Vector*) malloc(sizeof(Vector));
 init(v3);  // No need to catch the return of init
 ```
 #### ```void push_flt(Vector*, float)```
