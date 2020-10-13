@@ -122,11 +122,9 @@ Print on a file all the information about the vector.\
 To print on screen use as file pointer ```stdout```.\
 Example:
 ``` Plain text
-### DEBUG ###
 Vector pointer: 0061FEF0
 Data pointer: 006B2258
-Capacity: 4
-Length: 3
+Capacity: 4. Length: 3
 2.500000 1.700000 0.010000
 ```
 
