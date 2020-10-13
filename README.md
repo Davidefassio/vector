@@ -15,17 +15,17 @@ typedef struct{
 EVERY vector must be initialized using this function (recommended) or manually. \
 Vector returned by other functions of this library are already initialized. \
 Passing already initialized vector to init can cause memory leaks. \
-Creating a standard Vector and initialize it.
+ - Creating a standard Vector and initialize it.
 ``` c
 Vector v1;
 init(&v1); // All the functions require a pointer to a vector so use &
 ```
-Declaring a pointer to vector and initialize it (recommended).
+ - Declaring a pointer to vector and initialize it (recommended).
 ``` c
 Vector* v2 = NULL; // It's crucial the initialization to NULL
 v2 = init(v2);     // Note that's the only case where you must catch the return of init.
 ```
-Allocating a pointer to vector and initialize it.
+ - Allocating a pointer to vector and initialize it.
 ``` c
 Vector* v3 = (Vector*) malloc(sizeof(Vector));
 init(v3);  // No need to catch the return of init
