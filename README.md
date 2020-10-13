@@ -30,11 +30,15 @@ Allocating a pointer to vector and initialize it.
 Vector* v3 = (Vector*) malloc(sizeof(Vector));
 init(v3);  // No need to catch the return of init
 ```
-#### ```void push_float(Vector*, float)```
+#### ```void push_flt(Vector*, float)```
 Append a number (float) at the end of the vector, if it exceeds the capacity it's resized automatically doubling the capacity. 
 
 #### ```void push_arr(Vector*, float*, size_t)```
 Append an array of float of length n at the end of the vector, if it exceeds the capacity it's resized automatically doubling it until it fit.
+
+#### ```void insert_flt(Vector*, float, size_t)```
+
+#### ```void insert_arr(Vector*, float, size_t, size_t)```
 
 #### ```Vector* vecrand(size_t, float, float)```
 Create, initialze and return a vector of length n filled with random float between min and max.
@@ -89,7 +93,9 @@ Elevate to the float given all the elements of the vector, modifying the vector.
 #### ```float dot_prod(Vector*, Vector*)```
 Dot product between two vectors of the same length. Return a float containing the result.
 
-#### ```void sort(Vector*, float* ())``` TODO
+#### ```int stdcomp(const void*, const void*)```
+
+#### ```void sort(Vector*, float* ())```
 Sort the vector using the func passed as compare function.
 It uses the qsort function defined in <stdlib.h>.
 The function passed must take two floats as input and return: -1, 0 or 1.
