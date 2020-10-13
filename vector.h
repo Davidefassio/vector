@@ -12,6 +12,7 @@
 #include <math.h>
 #include <time.h>
 #include <float.h>
+#include <string.h>
 
 typedef struct{
     float *data;
@@ -38,7 +39,7 @@ Vector* init(Vector *v){
     return v;
 }
 
-void push_float(Vector *v, float n){
+void push_flt(Vector *v, float n){
     if(v == NULL){
         printf("The pointer to vector points to NULL.\n");
         exit(EXIT_FAILURE);
@@ -95,6 +96,57 @@ void push_arr(Vector *v, float *arr, size_t n){
             v->data[v->length+i] = arr[i];
         }
         v->length += n;
+    }
+}
+
+void insert_flt(Vector *v, float n, size_t pos){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    if(pos > v->length){
+        printf("Index out of range.\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    if(pos == v->length){
+        push_flt(v, n);
+    }
+    else{
+        size_t i;
+        push_flt(v, v->data[v->length-1]);
+        for(i = v->length-2; i > pos; --i){
+            v->data[i] = v->data[i-1];
+        }
+        v->data[pos] = n;
+    }
+}
+
+void insert_arr(Vector *v, float *arr, size_t s, size_t f){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    if(s > v->length){
+        printf("Index out of range.\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    if(s == v->length){
+        push_arr(v, arr, f-s);
+    }
+    else{
+        size_t i;
+        
+        for(i = 0; i < f-s; ++i){
+            push_flt(v, v->data[v->length-1]);
+        }
+        for(i = s; i < f; ++i){
+            v->data[i+f-s] = v->data[i];
+            v->data[i] = arr[i-s];
+        }
     }
 }
 
@@ -252,7 +304,7 @@ Vector* sum(size_t cnt, ...){
             exit(EXIT_FAILURE);
         }
         init(tmp);
-        push_float(tmp, 0);
+        push_flt(tmp, 0);
         
         va_list args;
         va_start(args, cnt);
@@ -285,7 +337,7 @@ Vector* sum(size_t cnt, ...){
         set_size(tmp, l);
         
         for(i = 0; i < l; ++i){
-            push_float(tmp, 0);
+            push_flt(tmp, 0);
             va_start(args, cnt);
             for(j = 0; j < cnt; ++j){
                 tmp->data[i] += va_arg(args, Vector*)->data[i];
@@ -313,7 +365,7 @@ Vector* sub(size_t cnt, ...){
         va_list args;
         va_start(args, cnt);
         Vector *t = va_arg(args, Vector*);
-        push_float(tmp, t->data[0]);
+        push_flt(tmp, t->data[0]);
         size_t i;
         for(i = 1; i < t->length; ++i){
             tmp->data[0] -= t->data[i];
@@ -343,7 +395,7 @@ Vector* sub(size_t cnt, ...){
         
         for(i = 0; i < l; ++i){
             va_start(args, cnt);
-            push_float(tmp, va_arg(args, Vector*)->data[i]);
+            push_flt(tmp, va_arg(args, Vector*)->data[i]);
             for(j = 1; j < cnt; ++j){
                 tmp->data[i] -= va_arg(args, Vector*)->data[i];
             }
@@ -366,7 +418,7 @@ Vector* mult(size_t cnt, ...){
             exit(EXIT_FAILURE);
         }
         init(tmp);
-        push_float(tmp, 1);
+        push_flt(tmp, 1);
         
         va_list args;
         va_start(args, cnt);
@@ -399,7 +451,7 @@ Vector* mult(size_t cnt, ...){
         set_size(tmp, l);
         
         for(i = 0; i < l; ++i){
-            push_float(tmp, 1);
+            push_flt(tmp, 1);
             va_start(args, cnt);
             for(j = 0; j < cnt; ++j){
                 tmp->data[i] *= va_arg(args, Vector*)->data[i];
@@ -427,7 +479,7 @@ Vector* divide(size_t cnt, ...){
         va_list args;
         va_start(args, cnt);
         Vector *t = va_arg(args, Vector*);
-        push_float(tmp, t->data[0]);
+        push_flt(tmp, t->data[0]);
         size_t i;
         for(i = 1; i < t->length; ++i){
             tmp->data[0] /= t->data[i];
@@ -457,7 +509,7 @@ Vector* divide(size_t cnt, ...){
         
         for(i = 0; i < l; ++i){
             va_start(args, cnt);
-            push_float(tmp, va_arg(args, Vector*)->data[i]);
+            push_flt(tmp, va_arg(args, Vector*)->data[i]);
             for(j = 1; j < cnt; ++j){
                 tmp->data[i] /= va_arg(args, Vector*)->data[i];
             }
@@ -526,6 +578,21 @@ float dot_prod(Vector *v1, Vector *v2){
     }
     
     return sum;
+}
+
+int stdcomp(const void *a, const void *b){
+    float x = *(float*)a - *(float*)b;
+    if(x < 0){ return -1; }       // a < b
+    else if(x == 0){ return 0; }  // a = b
+    else{ return 1; }             // a > b
+}
+
+void sort(Vector *v, int (*func)(const void*, const void*)){
+    if(v == NULL){
+        printf("The pointer to vector points to NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+    qsort(v->data, v->length, sizeof(float), func);
 }
 
 void reverse(Vector *v){
