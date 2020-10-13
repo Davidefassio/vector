@@ -20,7 +20,7 @@ Creating a standard Vector and initialize it.
 Vector v1;
 init(&v1); // All the functions require a pointer to a vector so use &
 ```
-Creating a pointer to vector and initialize it (recommended).
+Declaring a pointer to vector and initialize it (recommended).
 ``` c
 Vector* v2 = NULL; // It's crucial the initialization to NULL
 v2 = init(v2);     // Note that's the only case where you must catch the return of init.
