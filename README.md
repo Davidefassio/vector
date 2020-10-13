@@ -18,7 +18,7 @@ Passing already initialized vector to init can cause memory leaks. \
 Creating a standard Vector and initialize it.
 ``` c
 Vector v1;
-init(&v1); // All the funztion require a pointer to a vector so use &
+init(&v1); // All the functions require a pointer to a vector so use &
 ```
 Creating a pointer to vector and initialize it (recommended).
 ``` c
