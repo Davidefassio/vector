@@ -44,7 +44,7 @@ Append an array of float of length n at the end of the vector, if it exceeds the
 Create, initialze and return a vector of length n filled with random float between min and max.
 
 #### ```void pop(Vector*, size_t)```
-Delete the last n elements of the vector. The capacity remain unchaged.
+Delete the last n elements of the vector. The capacity remains unchaged.
 
 #### ```void set_size(Vector*, size_t)```
 Set a given capacity. If it's less than the length than some data will be lost. \
