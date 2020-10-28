@@ -3,10 +3,16 @@
  *  Copyright (c) 2020 Davide Fassio
  */
 
+// TODO (high prio to low)
+// - insert
+// - sort
+// - compare
+
 #ifndef GENVECTOR_H
 #define GENVECTOR_H
 
 #include <stdlib.h>
+#include <string.h>
 
 /**
  *  Define the struct holding the vector.
@@ -16,10 +22,10 @@
  */
 #define defvec(n, t) \
 typedef struct{ \
-t *data; \
-size_t size; \
-size_t capacity; \
-size_t length; \
+    t *data; \
+    size_t size; \
+    size_t capacity; \
+    size_t length; \
 }n;
 
 
@@ -39,14 +45,15 @@ v->length = 0; })
  *  Append an element to the end of the vector.
  *  Parameters:
  *   - v => pointer to vector;
- *   - elem => element to append.
+ *   - n => element to append. (stable)
  */
-#define push(v, elem) ({ \
-if(v->length < v->capacity) v->data[(v->length)++] = (elem); \
+#define push(v, n) ({ \
+if(v->length < v->capacity) v->data[(v->length)++] = (n); \
 else{ \
     v->capacity *= 2; \
     v->data = realloc(v->data, v->size*v->capacity); \
-    v->data[(v->length)++] = (elem); } })
+    v->data[(v->length)++] = (n); \
+} })
 
 
 /**
@@ -70,7 +77,8 @@ else{ \
 if(n > 0 && v->capacity != n){ \
     v->data = realloc(v->data, v->size*n); \
     v->capacity = n; \
-    if(v->length > n){ v->length = n; }}
+    if(v->length > n) v->length = n; \
+} })
 
 
 /**
@@ -82,6 +90,21 @@ if(n > 0 && v->capacity != n){ \
 size_t l = (v->length == 0) ? 1 : v->length; \
 v->data = realloc(v->data, v->size*l); \
 v->capacity = l; })
+
+
+/**
+ *  Reverse the data array.
+ *  Parameters:
+ *   - v => pointer to vector.
+ */
+#define reverse(v) ({ \
+size_t i; void *tmp = malloc(v->size); \
+for(i = 0; i < v->length / 2; ++i){ \
+    memcpy(tmp, v->data + i, v->size); \
+    memcpy(v->data + i, v->data + v->length - i - 1, v->size); \
+    memcpy(v->data + v->length - i - 1, tmp, v->size); \
+} free(tmp); })
+
 
 /**
  *  Free the memory allocated for the data
