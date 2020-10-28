@@ -5,6 +5,7 @@
 
 // TODO (high prio to low)
 // - insert
+// - erase
 // - sort
 // - compare
 
@@ -21,11 +22,11 @@
  *   - t => type of elements in data.
  */
 #define defvec(n, t) \
-typedef struct{ \
-    t *data; \
-    size_t size; \
+typedef struct{      \
+    t *data;         \
+    size_t size;     \
     size_t capacity; \
-    size_t length; \
+    size_t length;   \
 }n;
 
 
@@ -34,10 +35,10 @@ typedef struct{ \
  *  Parameters:
  *   - v => pointer to vector;
  */
-#define init(v) ({ \
+#define init(v) ({          \
 v->size = sizeof(*v->data); \
-v->data = malloc(v->size); \
-v->capacity = 1; \
+v->data = malloc(v->size);  \
+v->capacity = 1;            \
 v->length = 0; })
 
 
@@ -47,12 +48,12 @@ v->length = 0; })
  *   - v => pointer to vector;
  *   - n => element to append. (stable)
  */
-#define push(v, n) ({ \
+#define push(v, n) ({                                     \
 if(v->length < v->capacity) v->data[(v->length)++] = (n); \
-else{ \
-    v->capacity *= 2; \
-    v->data = realloc(v->data, v->size*v->capacity); \
-    v->data[(v->length)++] = (n); \
+else{                                                     \
+    v->capacity *= 2;                                     \
+    v->data = realloc(v->data, v->size*v->capacity);      \
+    v->data[(v->length)++] = (n);                         \
 } })
 
 
@@ -73,11 +74,11 @@ else{ \
  *   - v => pointer to vector;
  *   - n => new capacity (in elements).
  */
-#define resize(v, n) ({ \
-if(n > 0 && v->capacity != n){ \
+#define resize(v, n) ({                    \
+if(n > 0 && v->capacity != n){             \
     v->data = realloc(v->data, v->size*n); \
-    v->capacity = n; \
-    if(v->length > n) v->length = n; \
+    v->capacity = n;                       \
+    if(v->length > n) v->length = n;       \
 } })
 
 
@@ -86,9 +87,9 @@ if(n > 0 && v->capacity != n){ \
  *  Parameters:
  *   - v => pointer to vector.
  */
-#define shrink(v) ({ \
+#define shrink(v) ({                         \
 size_t l = (v->length == 0) ? 1 : v->length; \
-v->data = realloc(v->data, v->size*l); \
+v->data = realloc(v->data, v->size*l);       \
 v->capacity = l; })
 
 
@@ -97,12 +98,12 @@ v->capacity = l; })
  *  Parameters:
  *   - v => pointer to vector.
  */
-#define reverse(v) ({ \
-size_t i; void *tmp = malloc(v->size); \
-for(i = 0; i < v->length / 2; ++i){ \
-    memcpy(tmp, v->data + i, v->size); \
+#define reverse(v) ({                                          \
+size_t i; void *tmp = malloc(v->size);                         \
+for(i = 0; i < v->length / 2; ++i){                            \
+    memcpy(tmp, v->data + i, v->size);                         \
     memcpy(v->data + i, v->data + v->length - i - 1, v->size); \
-    memcpy(v->data + v->length - i - 1, tmp, v->size); \
+    memcpy(v->data + v->length - i - 1, tmp, v->size);         \
 } free(tmp); })
 
 
