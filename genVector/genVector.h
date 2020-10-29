@@ -39,6 +39,15 @@ v.length = 0; })
 
 
 /**
+ *  Return true if the index is in [0, data length).
+ *  Parameters:
+ *   - v => istance of vector;
+ *   - i => index to check.
+ */
+#define inBound(v, i) (i >= 0 && i < v.length) ? 1 : 0
+
+
+/**
  *  Append an element to the end of the vector.
  *  Parameters:
  *   - v => istance of vector;
@@ -122,15 +131,6 @@ if(n > 0 && v.capacity != n){             \
 size_t l = (v.length == 0) ? 1 : v->length; \
 v.data = realloc(v.data, v.size * l);       \
 v.capacity = l; })
-
-
-/**
- *  Return true if the index is in [0, data length).
- *  Parameters:
- *   - v => istance of vector;
- *   - i => index to check.
- */
-#define inBound(v, i) (i >= 0 && i < v.length) ? 1 : 0
 
 
 /**
