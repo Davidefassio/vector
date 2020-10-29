@@ -10,8 +10,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <stdio.h> // DEBUG
-
 
 /**
  *  Define the struct holding the vector.
