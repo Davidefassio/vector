@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <stdio.h> // DEBUG
+
 
 /**
  *  Define the struct holding the vector.
@@ -86,7 +88,7 @@ else{                                                        \
     size_t i; push(v, v.data[v.length-1]);                   \
     for(i = v.length-2; i > p; --i) v.data[i] = v.data[i-1]; \
     v.data[p] = (n);                                         \
-} ++v.length; })
+} })
 
 
 /**
@@ -96,15 +98,16 @@ else{                                                        \
  *   - f => first (included);
  *   - l => last (excluded).
  */
-#define erase(v, f, l) ({                                               \
-if(l == v.length) v.length -= (l - f);                                  \
-else if(!inBound(v, f) || !inBound(v, l)) exit(EXIT_FAILURE);           \
-else{                                                                   \
-    size_t i;                                                           \
-    for(i = f; i < l && i + l - f < v.length; ++i) v[i] = v[i + l - f]; \
-    v-length -= (l - f);                                                \
+#define erase(v, f, l) ({ \
+if(l < f) exit(EXIT_FAILURE);                                 \
+else if(l == v.length) v.length -= (l - f);                   \
+else if(!inBound(v, f) || !inBound(v, l)) exit(EXIT_FAILURE); \
+else{                                                         \
+    size_t i;                                                 \
+    for(i = f; i + l - f < v.length; ++i)                     \
+        v.data[i] = v.data[i + l - f];                        \
+    v.length -= (l - f);                                      \
 } })
-
 
 
 /**
@@ -127,9 +130,9 @@ if(n > 0 && v.capacity != n){             \
  *  Parameters:
  *   - v => istance of vector.
  */
-#define shrink(v) ({                        \
-size_t l = (v.length == 0) ? 1 : v->length; \
-v.data = realloc(v.data, v.size * l);       \
+#define shrink(v) ({                       \
+size_t l = (v.length == 0) ? 1 : v.length; \
+v.data = realloc(v.data, v.size * l);      \
 v.capacity = l; })
 
 
