@@ -3,7 +3,15 @@ A generalization to all types of the library vector.h
 
 ## Functions
 #### ```defvec(n, t)```
-Define a struct named n with data of type t.
+Define a struct named n with data of type t. \
+``` C
+typedef struct{
+    t *data;          // Dynamic array of type t.
+    size_t size;      // Size in Bytes of t.
+    size_t capacity;  // Num. of elements that data can hold.
+    size_t length;    // Num. of elements that data is holding.
+}n;
+```
 
 #### ```init(v)```
 Initialize the struct holding the vector.
