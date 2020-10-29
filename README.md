@@ -136,7 +136,6 @@ Copyright (c) 2020 Davide Fassio
 Davide Fassio.
 
 ## TODO
-- [ ] Accrescere la v->length in insert_flt e insert_arr.
 - [ ] Deconstructor.
 - [ ] Aggiungere codice di test esaustivo per tutte le funzioni.
 - [ ] Aggiungere codice d'esempio o nella doc o nella repo.
