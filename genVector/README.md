@@ -51,7 +51,7 @@ Reverse the data of v.
 Free the memory allocated for the data of v.
 
 ## License
-MIT License
+MIT License \
 Copyright (c) 2020 Davide Fassio
 
 ## Author
