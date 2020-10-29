@@ -3,7 +3,7 @@ A generalization to all types of the library vector.h
 
 ## Functions
 #### ```defvec(n, t)```
-Define a struct named n with data of type t. \
+Define a struct named n with data of type t.
 ``` C
 typedef struct{
     t *data;          // Dynamic array of type t.
