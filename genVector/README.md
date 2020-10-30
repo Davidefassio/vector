@@ -2,6 +2,7 @@
 A generalization to all types of the library vector.h
 
 ## Functions
+In ALL of the following macros the v is an istance of the struct, NOT a pointer to struct.
 #### ```defvec(n, t)```
 Define a struct named n with data of type t.
 ``` C
