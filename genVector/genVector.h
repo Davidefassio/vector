@@ -149,8 +149,7 @@ for(i = 0; i < v.length / 2; ++i){                         \
 
 
 /**
- *  Free the memory allocated for the data
- *  and for the vector.
+ *  Free the memory allocated for the data.
  *  Parameters:
  *   - v => istance of vector.
  */
