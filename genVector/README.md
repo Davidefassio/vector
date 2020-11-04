@@ -41,7 +41,7 @@ It only reduces the length by n. \
 Does NOT overwrite or obfuscate the data!
 
 #### ```insert(v, n, p)```
-Insert the element n at the position p of v.data.
+Insert the element n at the position p of v.data. \
 The pushing of new elements follows the cases explained under push().
 
 #### ```erase(v, f, l)```
@@ -53,7 +53,7 @@ Delete the elements of v.data in the range \[f, l).
 Set n as the capacity of v and realloc the data if needed.
 
 #### ```shrink(v)```
-Reduce the capacity of v to match the current length.
+Reduce the capacity of v to match the current length. \
 It's useful to save space in memory.
 
 #### ```reverse(v)```
