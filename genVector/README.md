@@ -1,5 +1,6 @@
 # genVector (Generalized vector)
-A generalization to all types of the library vector.h
+A generalization to all types of the library vector.h \
+Added support for C++ code. (Kinda useless though)
 
 ## Functions
 In ALL of the following macros the v is an istance of the struct, NOT a pointer to struct.
