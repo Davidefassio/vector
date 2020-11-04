@@ -10,14 +10,14 @@
 
 #include <cstdlib>
 extern "C" {
-
+    
 #else               // C code
-
+    
 #include <stdlib.h>
-
+    
 #endif /* __cplusplus */
-
-
+    
+    
 /**
  *  Define the struct holding the vector.
  *  Parameters:
@@ -31,8 +31,8 @@ typedef struct{      \
     size_t capacity; \
     size_t length;   \
 }n;
-
-
+    
+    
 /**
  *  Initialize the struct holding the vector.
  *  Parameters:
@@ -43,8 +43,8 @@ v.data = malloc(sizeof(*v.data));  \
 v._tmp = NULL;                     \
 v.capacity = 1;                    \
 v.length = 0; })
-
-
+    
+    
 /**
  *  Return true if the index is in [0, data length).
  *  Parameters:
@@ -52,8 +52,8 @@ v.length = 0; })
  *   - i => index to check.
  */
 #define inBound(v, i) (i >= 0 && i < v.length) ? 1 : 0
-
-
+    
+    
 /**
  *  Append an element to the end of the vector.
  *
@@ -70,20 +70,17 @@ v.length = 0; })
  *   - n => element to append. (stable)
  */
 #ifdef VECTOR_LINEAR_GROWTH
-
+    
 #define push(v, n) ({                                         \
-if(v.length < v.capacity) v.data[(v.length)++] = (n);         \
-else{                                                         \
+if(v.length >= v.capacity){                                   \
     v.data = realloc(v.data, sizeof(*v.data) * ++v.capacity); \
     if(v.data == NULL) exit(EXIT_FAILURE);                    \
-    v.data[(v.length)++] = (n);                               \
-} })
-
+} v.data[(v.length)++] = (n); })
+    
 #else
-
+    
 #define push(v, n) ({                                             \
-if(v.length < v.capacity) v.data[(v.length)++] = (n);             \
-else{                                                             \
+if(v.length >= v.capacity){                                       \
     v.capacity *= 2;                                              \
     v._tmp = realloc(v.data, sizeof(*v.data) * v.capacity);       \
     if(v._tmp == NULL){                                           \
@@ -92,12 +89,11 @@ else{                                                             \
         if(v._tmp == NULL) exit(EXIT_FAILURE);                    \
     }                                                             \
     v.data = v._tmp;                                              \
-    v.data[(v.length)++] = (n);                                   \
-} })
-
+} v.data[(v.length)++] = (n); })
+    
 #endif /* VECTOR_LINEAR_GROWTH */
-
-
+    
+    
 /**
  *  Delete the last n elements.
  *  Does NOT cancel or obfuscate the data.
@@ -106,8 +102,8 @@ else{                                                             \
  *   - n => number of elements to be deleted.
  */
 #define pop(v, n) ({ v.length = (v.length > n) ? v.length - n : 0; })
-
-
+    
+    
 /**
  *  Insert an element in a given position.
  *  Paramaters:
@@ -123,8 +119,8 @@ else{                                                        \
     for(i = v.length-2; i > p; --i) v.data[i] = v.data[i-1]; \
     v.data[p] = (n);                                         \
 } })
-
-
+    
+    
 /**
  *  Erase the elements in the range [firts, last).
  *  Parameters:
@@ -142,8 +138,8 @@ else{                                                         \
         v.data[i] = v.data[i + l - f];                        \
     v.length -= (l - f);                                      \
 } })
-
-
+    
+    
 /**
  *  Set n as the new capacity.
  *  If n is gt the current capacity a reallocation occurs.
@@ -157,8 +153,8 @@ if(n > 0 && v.capacity != n){                      \
     v.capacity = n;                                \
     if(v.length > n) v.length = n;                 \
 } })
-
-
+    
+    
 /**
  *  Reduce the capacity to match the current length
  *  Parameters:
@@ -170,8 +166,8 @@ if(v.capacity != v.length){                        \
     v.data = realloc(v.data, sizeof(*v.data) * l); \
     v.capacity = l;                                \
 } })
-
-
+    
+    
 /**
  *  Reverse the data array.
  *  Parameters:
@@ -184,16 +180,16 @@ for(i = 0; i < v.length / 2; ++i){                \
     *(v.data + i) = *(v.data + v.length - i - 1); \
     *(v.data + v.length - i - 1) = *(v._tmp);     \
 } free(v._tmp); })
-
-
+    
+    
 /**
  *  Free the memory allocated for the data.
  *  Parameters:
  *   - v => istance of vector.
  */
 #define delete(v) free(v.data)
-
-
+    
+    
 #ifdef __cplusplus  // Close the open bracket from extern "C"
 }
 #endif /* __cplusplus */
