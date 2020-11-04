@@ -45,8 +45,8 @@ Insert the element n at the position p of v.data.
 The pushing of new elements follows the cases explained under push().
 
 #### ```erase(v, f, l)```
-Delete the elements of v.data in the range \[f, l). \
- - f (first) included. \
+Delete the elements of v.data in the range \[f, l).
+ - f (first) included.
  - l (last) ecluded.
 
 #### ```resize(v, n)```
