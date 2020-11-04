@@ -31,7 +31,7 @@ You can define the constant ```#define VECTOR_LINEAR_GROWTH```:
  
 In every case if it can't increase the capacity even by 1 then it exit with EXIT_FAILURE.
 
-Pushing n elements will result in: \
+Pushing n elements will result in:
  - O(n^2): slower but uses less space in memory.
  - O(nlogn): much faster and you can use shrink the free the unused space.
 
@@ -62,9 +62,6 @@ Free the memory allocated for the data of v.
 ## License
 MIT License \
 Copyright (c) 2020 Davide Fassio
-
-## TODO
-- [ ] Se si scegli un realloc \*2 ma fallisce applicare un realloc conservativo.
 
 ## Author
 Davide Fassio.
