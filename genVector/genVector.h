@@ -20,7 +20,7 @@
 #define defvec(n, t) \
 typedef struct{      \
     t *data;         \
-    size_t size;     \
+    t *_tmp;         \
     size_t capacity; \
     size_t length;   \
 }n;
@@ -31,10 +31,10 @@ typedef struct{      \
  *  Parameters:
  *   - v => istance of vector;
  */
-#define init(v) ({        \
-v.size = sizeof(*v.data); \
-v.data = malloc(v.size);  \
-v.capacity = 1;           \
+#define init(v) ({                 \
+v.data = malloc(sizeof(*v.data));  \
+v._tmp = NULL;                     \
+v.capacity = 1;                    \
 v.length = 0; })
 
 
@@ -49,36 +49,51 @@ v.length = 0; })
 
 /**
  *  Append an element to the end of the vector.
+ *
+ *  If the constant VECTOR_LINEAR_GROWTH is defined the capacity
+ *  is increased only by 1 every time.
+ *  If it's not defined then the capacity doubles every time if it can
+ *  (resulting in a logarithmic complexity rather than a linear),
+ *  if it can't then is increased only by 1.
+ *  In every case if it can't increase the capacity even by 1 then
+ *  it exit with EXIT_FAILURE.
+ *
  *  Parameters:
  *   - v => istance of vector;
  *   - n => element to append. (stable)
  */
 #ifdef VECTOR_LINEAR_GROWTH
 
-#define push(v, n) ({                                 \
-if(v.length < v.capacity) v.data[(v.length)++] = (n); \
-else{                                                 \
-    v.capacity += 1;                                  \
-    v.data = realloc(v.data, v.size * v.capacity);    \
-    v.data[(v.length)++] = (n);                       \
+#define push(v, n) ({                                         \
+if(v.length < v.capacity) v.data[(v.length)++] = (n);         \
+else{                                                         \
+    v.data = realloc(v.data, sizeof(*v.data) * ++v.capacity); \
+    if(v.data == NULL) exit(EXIT_FAILURE);                    \
+    v.data[(v.length)++] = (n);                               \
 } })
 
 #else
 
-#define push(v, n) ({                                 \
-if(v.length < v.capacity) v.data[(v.length)++] = (n); \
-else{                                                 \
-    v.capacity *= 2;                                  \
-    v.data = realloc(v.data, v.size * v.capacity);    \
-    v.data[(v.length)++] = (n);                       \
+#define push(v, n) ({                                             \
+if(v.length < v.capacity) v.data[(v.length)++] = (n);             \
+else{                                                             \
+    v.capacity *= 2;                                              \
+    v._tmp = realloc(v.data, sizeof(*v.data) * v.capacity);       \
+    if(v._tmp == NULL){                                           \
+        v.capacity /= 2;                                          \
+        v._tmp = realloc(v.data, sizeof(*v.data) * ++v.capacity); \
+        if(v._tmp == NULL) exit(EXIT_FAILURE);                    \
+    }                                                             \
+    v.data = v._tmp;                                              \
+    v.data[(v.length)++] = (n);                                   \
 } })
 
-#endif
+#endif /* VECTOR_LINEAR_GROWTH */
 
 
 /**
  *  Delete the last n elements.
- *  Does NOT cancel the data.
+ *  Does NOT cancel or obfuscate the data.
  *  Parameters:
  *   - v => istance of vector;
  *   - n => number of elements to be deleted.
@@ -131,7 +146,7 @@ else{                                                         \
  */
 #define resize(v, n) ({                   \
 if(n > 0 && v.capacity != n){             \
-    v.data = realloc(v.data, v.size * n); \
+    v.data = realloc(v.data, sizeof(*v.data) * n); \
     v.capacity = n;                       \
     if(v.length > n) v.length = n;        \
 } })
@@ -144,7 +159,7 @@ if(n > 0 && v.capacity != n){             \
  */
 #define shrink(v) ({                       \
 size_t l = (v.length == 0) ? 1 : v.length; \
-v.data = realloc(v.data, v.size * l);      \
+v.data = realloc(v.data, sizeof(*v.data) * l);      \
 v.capacity = l; })
 
 
@@ -154,11 +169,11 @@ v.capacity = l; })
  *   - v => istance of vector.
  */
 #define reverse(v) ({                                      \
-size_t i; void *tmp = malloc(v.size);                      \
+size_t i; void *tmp = malloc(sizeof(*v.data));                      \
 for(i = 0; i < v.length / 2; ++i){                         \
-    memcpy(tmp, v.data + i, v.size);                       \
-    memcpy(v.data + i, v.data + v.length - i - 1, v.size); \
-    memcpy(v.data + v.length - i - 1, tmp, v.size);        \
+    memcpy(tmp, v.data + i, sizeof(*v.data));                       \
+    memcpy(v.data + i, v.data + v.length - i - 1, sizeof(*v.data)); \
+    memcpy(v.data + v.length - i - 1, tmp, sizeof(*v.data));        \
 } free(tmp); })
 
 
