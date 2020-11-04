@@ -1,10 +1,7 @@
-//
-//  main.c
-//  genVector
-//
-//  Created by Davide Fassio on 28/10/2020.
-//  Copyright © 2020 Davide Fassio. All rights reserved.
-//
+/**
+ *  MIT License
+ *  Copyright (c) 2020 Davide Fassio
+ */
 
 #include <stdio.h>
 #include "genvector.h"
