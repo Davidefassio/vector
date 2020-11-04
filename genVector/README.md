@@ -55,6 +55,10 @@ Free the memory allocated for the data of v.
 MIT License \
 Copyright (c) 2020 Davide Fassio
 
+## TODO
+[ ] Aggiungere possibilita' di richiedere un realloc conservativo (+1) o efficiente (\*2).
+[ ] Se si scegli un realloc \*2 ma fallisce applicare un realloc conservativo.
+
 ## Author
 Davide Fassio.
 
