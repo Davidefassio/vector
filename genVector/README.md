@@ -25,12 +25,13 @@ Returns: 1 = valid, 0 = invalid.
 Append the element n to the data of v. \
 If it exceeds the capacity it resizes the container.
 
-You can define a constant: ```#define VECTOR_LINEAR_GROWTH```:
+You can define the constant ```#define VECTOR_LINEAR_GROWTH```:
  - if it is defined the capacity is increased by 1 every time;
- - if it is NOT defined the capacity will double every time if it can, if it cannot then the capacity is increased by 1. \
+ - if it is NOT defined the capacity will double every time if it can, if it cannot then the capacity is increased by 1.
+ 
 In every case if it can't increase the capacity even by 1 then it exit with EXIT_FAILURE.
 
-Pushing n elements will result in:
+Pushing n elements will result in: \
  - O(n^2): slower but uses less space in memory.
  - O(nlogn): much faster and you can use shrink the free the unused space.
 
