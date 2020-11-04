@@ -8,6 +8,7 @@ Define a struct named n with data of type t.
 ``` C
 typedef struct{
     t *data;          // Dynamic array of type t.
+    t *_tmp;          // Private temporary pointer.
     size_t capacity;  // Num. of elements that data can hold.
     size_t length;    // Num. of elements that data is holding.
 }n;
@@ -22,9 +23,11 @@ Returns: 1 = valid, 0 = invalid.
 
 #### ```push(v, n)```
 Append the element n to the data of v. \
-If it exceeds the capacity it resizes the container. \
-The new capacity is twice the old, so in the long run \
-the cost of the function is logarithmic and not linear. 
+If it exceeds the capacity it resizes the container.
+
+If the constant VECTOR_LINEAR_GROWTH is defined the capacity is increased only by 1 every time. \
+If it's not defined then the capacity doubles every time if it can (resulting in a logarithmic complexity rather than a linear), if it can't then is increased only by 1. \
+In every case if it can't increase the capacity even by 1 then it exit with EXIT_FAILURE.
 
 #### ```pop(v, n)```
 Delete the last n elements from the data of v. \
