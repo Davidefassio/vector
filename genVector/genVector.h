@@ -144,11 +144,11 @@ else{                                                         \
  *   - v => istance of vector;
  *   - n => new capacity (in elements).
  */
-#define resize(v, n) ({                   \
-if(n > 0 && v.capacity != n){             \
+#define resize(v, n) ({                            \
+if(n > 0 && v.capacity != n){                      \
     v.data = realloc(v.data, sizeof(*v.data) * n); \
-    v.capacity = n;                       \
-    if(v.length > n) v.length = n;        \
+    v.capacity = n;                                \
+    if(v.length > n) v.length = n;                 \
 } })
 
 
@@ -157,9 +157,9 @@ if(n > 0 && v.capacity != n){             \
  *  Parameters:
  *   - v => istance of vector.
  */
-#define shrink(v) ({                       \
-size_t l = (v.length == 0) ? 1 : v.length; \
-v.data = realloc(v.data, sizeof(*v.data) * l);      \
+#define shrink(v) ({                           \
+size_t l = (v.length == 0) ? 1 : v.length;     \
+v.data = realloc(v.data, sizeof(*v.data) * l); \
 v.capacity = l; })
 
 
@@ -168,9 +168,9 @@ v.capacity = l; })
  *  Parameters:
  *   - v => istance of vector.
  */
-#define reverse(v) ({                                      \
+#define reverse(v) ({                                               \
 size_t i; void *tmp = malloc(sizeof(*v.data));                      \
-for(i = 0; i < v.length / 2; ++i){                         \
+for(i = 0; i < v.length / 2; ++i){                                  \
     memcpy(tmp, v.data + i, sizeof(*v.data));                       \
     memcpy(v.data + i, v.data + v.length - i - 1, sizeof(*v.data)); \
     memcpy(v.data + v.length - i - 1, tmp, sizeof(*v.data));        \
