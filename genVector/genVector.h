@@ -6,9 +6,16 @@
 #ifndef GENVECTOR_H
 #define GENVECTOR_H
 
-// Include some standard libraries.
+#ifdef __cplusplus  // C++ code
+
+#include <cstdlib>
+extern "C" {
+
+#else               // C code
+
 #include <stdlib.h>
-#include <string.h>
+
+#endif /* __cplusplus */
 
 
 /**
@@ -186,5 +193,9 @@ for(i = 0; i < v.length / 2; ++i){                \
  */
 #define delete(v) free(v.data)
 
+
+#ifdef __cplusplus  // Close the open bracket from extern "C"
+}
+#endif /* __cplusplus */
 
 #endif /* GENVECTOR_H */
