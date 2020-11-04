@@ -38,13 +38,16 @@ Pushing n elements will result in:
 #### ```pop(v, n)```
 Delete the last n elements from the data of v. \
 It only reduces the length by n. \
-Does NOT overwrite the date!
+Does NOT overwrite or obfuscate the data!
 
 #### ```insert(v, n, p)```
 Insert the element n at the position p of v.data.
+The pushing of new elements follows the cases explained under push().
 
 #### ```erase(v, f, l)```
-Delete the elements of v.data in the range [f, l).
+Delete the elements of v.data in the range \[f, l). \
+ - f (first) included. \
+ - l (last) ecluded.
 
 #### ```resize(v, n)```
 Set n as the capacity of v and realloc the data if needed.
