@@ -53,6 +53,18 @@ v.length = 0; })
  *   - v => istance of vector;
  *   - n => element to append. (stable)
  */
+#ifdef VECTOR_LINEAR_GROWTH
+
+#define push(v, n) ({                                 \
+if(v.length < v.capacity) v.data[(v.length)++] = (n); \
+else{                                                 \
+    v.capacity += 1;                                  \
+    v.data = realloc(v.data, v.size * v.capacity);    \
+    v.data[(v.length)++] = (n);                       \
+} })
+
+#else
+
 #define push(v, n) ({                                 \
 if(v.length < v.capacity) v.data[(v.length)++] = (n); \
 else{                                                 \
@@ -60,6 +72,8 @@ else{                                                 \
     v.data = realloc(v.data, v.size * v.capacity);    \
     v.data[(v.length)++] = (n);                       \
 } })
+
+#endif
 
 
 /**
